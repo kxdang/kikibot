@@ -1,9 +1,14 @@
 
 import logging
+import secret
 import telegram
+import schedule
+import time
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
+chat_id = secret.chat_id
+token = secret.token
 # Enable logging
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
@@ -11,7 +16,7 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-bot = telegram.Bot(token="TOKEN`")
+bot = telegram.Bot(token=token)
 
 
 # Define a few command handlers. These usually take the two arguments update and
@@ -19,6 +24,18 @@ bot = telegram.Bot(token="TOKEN`")
 def start(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /start is issued."""
     update.message.reply_text('Hi!')
+
+
+def humidifier_reminder():
+    bot.sendMessage(
+        chat_id=chat_id, text='Yo refill your humidifer and switch the filter around')
+
+
+def scheduled_message():
+    schedule.every(10).seconds.do(humidifier_reminder)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
 
 
 def help_command(update: Update, context: CallbackContext) -> None:
@@ -41,7 +58,7 @@ def main():
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
     updater = Updater(
-        "TOKEN", use_context=True)
+        token, use_context=True)
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
@@ -57,7 +74,8 @@ def main():
 
     # Start the Bot
     updater.start_polling()
-    bot.sendMessage(chat_id='ID', text='Hello world')
+    scheduled_message()
+    # bot.sendMessage(chat_id=chat_id, text='Hello world') triggers a send on start
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
