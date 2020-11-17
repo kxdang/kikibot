@@ -33,19 +33,14 @@ def humidifier_reminder():
 
 def humidifier_cleaner_reminder():
     bot.sendMessage(
-        chat_id=chat_id, text='Yo refill your humidifier and switch the filter around')
+        chat_id=chat_id, text="Clean your humidifer. It's been a week")
 
 
 def garbage_takeout_reminder():
     bot.sendMessage(
         chat_id=chat_id, text='Garbage/Recycling day tomorrow, double check and roll out the bin.')
-
-
-def clean_humidifier():
-    bot.sendMessage(
-        chat_id=chat_id, text='Garbage/Recycling day tomorrow, double check and roll out the bin.')
-
-
+    
+    
 def do_laundry_reminder():
     bot.sendMessage(
         chat_id=chat_id, text='Do laundry pls')
@@ -58,10 +53,10 @@ def french_homework_reminder():
 
 def scheduled_message():
     schedule.every(2).days.at("21:00").do(humidifier_reminder)
-    schedule.every().monday.at("19:30").do(french_homework_reminder)
-    schedule.every().wednesday.at("18:30").do(garbage_takeout_reminder)
+    schedule.every().monday.at("17:30").do(french_homework_reminder)
+    schedule.every().wednesday.at("17:30").do(garbage_takeout_reminder)
     schedule.every().saturday.at("10:30").do(do_laundry_reminder)
-    schedule.every().saturday.at("11:30").do(humidifier_cleaner_reminder)
+    schedule.every().saturday.at("10:45").do(humidifier_cleaner_reminder)
 
     while True:
         schedule.run_pending()
