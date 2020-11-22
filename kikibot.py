@@ -44,7 +44,12 @@ def garbage_takeout_reminder():
 def do_laundry_reminder():
     bot.sendMessage(
         chat_id=chat_id, text='Do laundry pls')
+    
 
+def garbage_bin_retrieval():
+     bot.sendMessage(
+        chat_id=chat_id, text='Bring back the bins')
+     
 
 def french_homework_reminder():
     bot.sendMessage(
@@ -55,6 +60,7 @@ def scheduled_message():
     schedule.every(2).days.at("21:00").do(humidifier_reminder)
     schedule.every().monday.at("17:30").do(french_homework_reminder)
     schedule.every().wednesday.at("17:30").do(garbage_takeout_reminder)
+    schedule.every().thursday.at("12:15").do(garbage_bin_retrieval)
     schedule.every().saturday.at("10:30").do(do_laundry_reminder)
     schedule.every().saturday.at("10:45").do(humidifier_cleaner_reminder)
 
