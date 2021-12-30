@@ -33,21 +33,13 @@ def humidifier_reminder():
 
 def humidifier_cleaner_reminder():
     bot.sendMessage(
-        chat_id=chat_id, text="Clean your humidifer. It's been a week")
+        chat_id=chat_id, text="Clean your humidifier. It's been a week")
 
 
-def biscuit_meds():
-    bot.sendMessage(
-        chat_id=chat_id, text='Prednisone for biscuit.')
-    
 def do_laundry_reminder():
     bot.sendMessage(
         chat_id=chat_id, text='Do laundry pls')
 
-def french_homework_reminder():
-    bot.sendMessage(
-        chat_id=chat_id, text='Do french assignment')
-    
 def vitamin_d():
     bot.sendMessage(
         chat_id=chat_id, text='Take Vitamin D')
@@ -56,22 +48,15 @@ def husk():
     bot.sendMessage(
         chat_id=chat_id, text='Take psyllium husk')
 
-def lysine():
-    bot.sendMessage(
-        chat_id=chat_id, text='Take lysine pills')
-    
 def feedCats():
     bot.sendMessage(
         chat_id=chat_id, text='Feeding time for Mushu and Minou')
 
 def scheduled_message():
-    schedule.every().day.at("07:30").do(feedCats)
-    schedule.every().day.at("14:00").do(feedCats)
-    schedule.every().day.at("20:00").do(feedCats)
+    schedule.every().day.at("09:00").do(feedCats)
+    schedule.every().day.at("15:00").do(feedCats)
+    schedule.every().day.at("21:00").do(feedCats)
     schedule.every().day.at("09:30").do(vitamin_d)
-    schedule.every().day.at("12:30").do(husk)
-    schedule.every().day.at("18:30").do(husk)
-    schedule.every().day.at("12:00").do(lysine) 
     schedule.every().saturday.at("10:30").do(do_laundry_reminder)
 
     while True:
