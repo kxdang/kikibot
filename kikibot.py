@@ -36,33 +36,43 @@ def humidifier_cleaner_reminder():
         chat_id=chat_id, text="Clean your humidifer. It's been a week")
 
 
-def garbage_takeout_reminder():
+def biscuit_meds():
     bot.sendMessage(
-        chat_id=chat_id, text='Garbage/Recycling day tomorrow, double check and roll out the bin.')
-    
+        chat_id=chat_id, text='Prednisone for biscuit.')
     
 def do_laundry_reminder():
     bot.sendMessage(
         chat_id=chat_id, text='Do laundry pls')
-    
-
-def garbage_bin_retrieval():
-     bot.sendMessage(
-        chat_id=chat_id, text='Bring back the bins')
-     
 
 def french_homework_reminder():
     bot.sendMessage(
         chat_id=chat_id, text='Do french assignment')
+    
+def vitamin_d():
+    bot.sendMessage(
+        chat_id=chat_id, text='Take Vitamin D')
 
+def husk():
+    bot.sendMessage(
+        chat_id=chat_id, text='Take psyllium husk')
+
+def lysine():
+    bot.sendMessage(
+        chat_id=chat_id, text='Take lysine pills')
+    
+def feedCats():
+    bot.sendMessage(
+        chat_id=chat_id, text='Feeding time for Mushu and Minou')
 
 def scheduled_message():
-    schedule.every(2).days.at("21:00").do(humidifier_reminder)
-    schedule.every().monday.at("17:30").do(french_homework_reminder)
-    schedule.every().wednesday.at("17:30").do(garbage_takeout_reminder)
-    schedule.every().thursday.at("12:15").do(garbage_bin_retrieval)
+    schedule.every().day.at("07:30").do(feedCats)
+    schedule.every().day.at("14:00").do(feedCats)
+    schedule.every().day.at("20:00").do(feedCats)
+    schedule.every().day.at("09:30").do(vitamin_d)
+    schedule.every().day.at("12:30").do(husk)
+    schedule.every().day.at("18:30").do(husk)
+    schedule.every().day.at("12:00").do(lysine) 
     schedule.every().saturday.at("10:30").do(do_laundry_reminder)
-    schedule.every().saturday.at("10:45").do(humidifier_cleaner_reminder)
 
     while True:
         schedule.run_pending()
@@ -106,7 +116,7 @@ def main():
     # Start the Bot
     updater.start_polling()
     scheduled_message()
-    # bot.sendMessage(chat_id=chat_id, text='Hello world') triggers a send on start
+    bot.sendMessage(chat_id=chat_id, text='Kikibot Booted')
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
