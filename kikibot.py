@@ -54,7 +54,6 @@ def feedCats():
 
 def scheduled_message():
     schedule.every().day.at("09:00").do(feedCats)
-    schedule.every().day.at("15:00").do(feedCats)
     schedule.every().day.at("21:00").do(feedCats)
     schedule.every().day.at("09:30").do(vitamin_d)
     schedule.every().saturday.at("10:30").do(do_laundry_reminder)
