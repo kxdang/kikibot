@@ -4,6 +4,7 @@ import secret
 import telegram
 import schedule
 import time
+from checkStock import checkStock as outOfStock
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
@@ -52,7 +53,16 @@ def feedCats():
     bot.sendMessage(
         chat_id=chat_id, text='Feeding time for Mushu and Minou')
 
+def webScrape():
+    if (outOfStock):
+        bot.sendMessage(
+            chat_id=chat_id, text='Item is not in stock')
+    else: 
+        bot.sendMessage(
+            chat_id=chat_id, text='Item is in stock! https://shop.lululemon.com/p/men-pants/ABC-Pant-Slim-30/_/prod9700120?color=31382&sz=29')
+
 def scheduled_message():
+    schedule.every(1).minutes.do(webScrape)
     schedule.every().day.at("09:00").do(feedCats)
     schedule.every().day.at("21:00").do(feedCats)
     schedule.every().day.at("09:30").do(vitamin_d)
