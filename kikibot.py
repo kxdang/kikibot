@@ -54,12 +54,11 @@ def feedCats():
         chat_id=chat_id, text='Feeding time for Mushu and Minou')
 
 def webScrape():
-    if (outOfStock):
-        bot.sendMessage(
-            chat_id=chat_id, text='Item is not in stock')
-    else: 
+    if (not outOfStock):
         bot.sendMessage(
             chat_id=chat_id, text='Item is in stock! https://shop.lululemon.com/p/men-pants/ABC-Pant-Slim-30/_/prod9700120?color=31382&sz=29')
+    else:
+        return None
 
 def scheduled_message():
     schedule.every(15).minutes.do(webScrape)
